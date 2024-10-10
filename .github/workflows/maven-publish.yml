@@ -30,10 +30,12 @@ jobs:
           url: "http://cicd-ai-demo.us-e2.cloudhub.io/hello"
           method: GET
       - name: Show API Response Status
+        if: always()
         run: |
           echo "Response Status: ${{ steps.api-request.outputs.response-status }}"
 
       - name: Show API Response Data
+        if: always()
         run: |
           echo "Response Data: ${{ steps.api-request.outputs.response-data }}"
 #Pass in the secrets we need for deployment as environment variables
