@@ -1,0 +1,25 @@
+name: Sandbox - Build and Deploy
+
+on:
+  push:
+    branches: main
+jobs:
+  buildAndDeploy:
+    runs-on: ubuntu-latest
+    steps:
+#first, we need to checkout our mule application's code
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Build and deploy artifact to sandbox
+#run the maven deploy lifecycle. The -B indicated a batch process,
+#which reduces the amount of logging the deployment does
+        run: mvn -B deploy -DmuleDeploy -s .maven/settings.xml
+#Pass in the secrets we need for deployment as environment variables
+        env:
+          NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
+          NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+          PLATFORM_USERNAME: ${{ secrets.PLATFORM_USERNAME }}
+          PLATFORM_PASSWORD: ${{ secrets.PLATFORM_PASSWORD }}
+          SANDBOX_CLIENT_ID: ${{ secrets.SANDBOX_CLIENT_ID }}
+          SANDBOX_CLIENT_SECRET: ${{ secrets.SANDBOX_CLIENT_SECRET }}
+          BUS_GROUP_ID: ${{ secrets.BUS_GROUP_ID }}
