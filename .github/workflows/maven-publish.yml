@@ -1,5 +1,4 @@
 name: Sandbox - Build and Deploy
-
 on:
   push:
     branches: main
@@ -25,8 +24,8 @@ jobs:
           url: "http://cicd-ai-demo.us-e2.cloudhub.io/hello"
           method: GET
       - name: Job Fail
-        if: ${{ fail() }}
-        uses: muhfaris/request-action@v1
+        if: ${{ failure() }}
+        uses: muhfaris/request-action@v0.1.2
         with:
           url: "http://cicd-ai-demo.us-e2.cloudhub.io/hello"
           method: GET
@@ -46,3 +45,4 @@ jobs:
           SANDBOX_CLIENT_ID: ${{ secrets.SANDBOX_CLIENT_ID }}
           SANDBOX_CLIENT_SECRET: ${{ secrets.SANDBOX_CLIENT_SECRET }}
           BUS_GROUP_ID: ${{ secrets.BUS_GROUP_ID }}
+  
