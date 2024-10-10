@@ -18,6 +18,25 @@ jobs:
 #run the maven deploy lifecycle. The -B indicated a batch process,
 #which reduces the amount of logging the deployment does
         run: mvn -B deploy -DmuleDeploy -s .maven/settings.xml
+      - name: Job Success
+        if: ${{ success() }}
+        uses: muhfaris/request-action@v1
+        with:
+          url: "http://cicd-ai-demo.us-e2.cloudhub.io/hello"
+          method: GET
+      - name: Job Fail
+        if: ${{ fail() }}
+        uses: muhfaris/request-action@v1
+        with:
+          url: "http://cicd-ai-demo.us-e2.cloudhub.io/hello"
+          method: GET
+      - name: Show API Response Status
+        run: |
+          echo "Response Status: ${{ steps.api-request.outputs.response-status }}"
+
+      - name: Show API Response Data
+        run: |
+          echo "Response Data: ${{ steps.api-request.outputs.response-data }}"
 #Pass in the secrets we need for deployment as environment variables
         env:
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
