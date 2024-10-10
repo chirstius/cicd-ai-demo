@@ -3,6 +3,8 @@ name: Sandbox - Build and Deploy
 on:
   push:
     branches: main
+  workflow_dispatch:
+    
 jobs:
   buildAndDeploy:
     runs-on: ubuntu-latest
