@@ -24,6 +24,7 @@ jobs:
           url: "http://cicd-ai-demo.us-e2.cloudhub.io/hello"
           method: GET
       - name: Job Fail
+        id: api-request
         if: ${{ failure() }}
         uses: muhfaris/request-action@v0.1.2
         with:
