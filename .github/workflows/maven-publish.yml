@@ -3,6 +3,8 @@ name: Sandbox - Build and Deploy
 on:
   push:
     branches: main
+    paths-ignore: 
+      - '**.yml'
   workflow_dispatch:
     
 jobs:
