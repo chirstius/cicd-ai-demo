@@ -22,6 +22,7 @@ jobs:
         run: |
           echo "JOB_STATE=success" >> $GITHUB_ENV
       - name: Set Job Fail
+        if: ${{ failure() }}
         run: |
           echo "JOB_STATE=fail" >> $GITHUB_ENV
       - name: Send Job Run Result
@@ -29,7 +30,7 @@ jobs:
         if: ${{ always() }}
         uses: muhfaris/request-action@v0.1.2
         with:
-          url: "https://cicd-status-processor-knpvkn.5sc6y6-4.usa-e2.cloudhub.io/status?state=${{ env.JOB_STATE }}&run_id=${{ github.run_id }}&repo_owner=${{ env.GITHUB_REPOSITORY_OWNER }}&repo_name=${{ env.GITHUB_REPOSITORY }}"
+          url: "https://cicd-status-processor-knpvkn.5sc6y6-4.usa-e2.cloudhub.io/status?state=${{ env.JOB_STATE }}&run_id=${{ github.run_id }}&repo_owner=${{ github.repository_owner }}&repo=${{ github.repository }}"
           method: GET
       - name: Show API Response Status
         if: always()
