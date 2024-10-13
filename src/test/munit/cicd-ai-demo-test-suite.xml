@@ -13,7 +13,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="9d2ab9d3-0d3d-4622-8253-d37c32589507" >
 		<http:request-connection host="localhost" port="8081" />
 	</http:request-config>
-	<munit:test name="cicd-ai-demo-test-suiteTest" doc:id="e73c4ab7-fec3-44a2-9803-e28144138438" >
+	<munit:test name="verify_mimetytpe_status_and_value" doc:id="e73c4ab7-fec3-44a2-9803-e28144138438" >
 		<munit:enable-flow-sources >
 			<munit:enable-flow-source value="cicd-ai-demoFlow" />
 		</munit:enable-flow-sources>
@@ -29,9 +29,12 @@ output application/java
 payload]]></ee:set-payload>
 				</ee:message>
 			</ee:transform>
-			<munit-tools:assert-that doc:name="Assert that" doc:id="862c5143-d585-4a03-9b2f-77ac3933d76c" is="#[MunitTools::equalTo('Hello World!')]" expression="#[payload]"/>
-			<munit-tools:assert-that doc:name="Assert response status" doc:id="fc107d2d-f7c5-4605-aaf8-aabfe0d8c22f" expression="#[attributes.statusCode]" is="#[MunitTools::equalTo(200)]" />
-			<munit-tools:assert-that doc:name="Assert content type" doc:id="dff45f17-1ca2-4335-a8a3-c78ebca166fc" expression="#[attributes.headers['content-type']]" is="#[MunitTools::equalTo('text/plain')]" />
+			<logger level="INFO" doc:name="MIME Type" doc:id="fc579cc6-31e4-4e2b-907a-ad322189256a" message="TESTING RESPONSE MIME TYPE" />
+			<munit-tools:assert-that doc:name="Assert content type is text/plain" doc:id="dff45f17-1ca2-4335-a8a3-c78ebca166fc" expression="#[attributes.headers['content-type']]" is="#[MunitTools::equalTo('text/plain')]" message='#["EXPECTED:\nMIME Type: text/plain\nGOT:\nMIME Type: " ++ payload.^mediaType]'/>
+			<logger level="INFO" doc:name="Status" doc:id="d6fc7e72-b171-4543-9b1b-bcc472af1486" message="TESTING RESPONSE STATUS" />
+			<munit-tools:assert-that doc:name="Assert response status is 200" doc:id="fc107d2d-f7c5-4605-aaf8-aabfe0d8c22f" expression="#[attributes.statusCode]" is="#[MunitTools::equalTo(200)]" />
+			<logger level="INFO" doc:name="Value" doc:id="f36eca47-3e53-469b-a747-048bbf03b522" message="TESTING RESPONSE VALUE"/>
+			<munit-tools:assert-that doc:name="Assert that value is Hello World!" doc:id="862c5143-d585-4a03-9b2f-77ac3933d76c" is="#[MunitTools::equalTo('Hello World!')]" expression="#[payload]"/>
 		</munit:validation>
 	</munit:test>
 
