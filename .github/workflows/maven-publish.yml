@@ -19,9 +19,11 @@ jobs:
         run: mvn -B deploy -DmuleDeploy -s .maven/settings.xml
       - name: Set Job Success
         if: ${{ success() }}
-        run: echo "JOB_STATE=success" >> $GITHUB_ENV
+        run: |
+          echo "JOB_STATE=success" >> $GITHUB_ENV
       - name: Set Job Fail
-        run: echo "JOB_STATE=fail" >> $GITHUB_ENV
+        run: |
+          echo "JOB_STATE=fail" >> $GITHUB_ENV
       - name: Send Job Run Result
         id: api-request
         if: ${{ always() }}
