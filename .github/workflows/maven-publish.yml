@@ -22,7 +22,7 @@ jobs:
         run: |
           echo "JOB_STATE=success" >> $GITHUB_ENV
       - name: Set Job Fail
-        if: ${{ fail() }}
+        if: ${{ failure() }}
         run: |
           echo "JOB_STATE=fail" >> $GITHUB_ENV
       - name: Send Job Run Result
