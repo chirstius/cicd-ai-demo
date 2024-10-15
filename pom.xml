@@ -13,7 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<app.runtime>4.7.3</app.runtime>
+		<app.runtime>4.7.3:2e</app.runtime>
 		<mule.maven.plugin.version>4.3.0</mule.maven.plugin.version>
 		<munit.version>3.2.0</munit.version>
 	</properties>
@@ -33,7 +33,7 @@
 				<configuration>
 					<classifier>mule-application</classifier>
 					<cloudHubDeployment>
-						<muleVersion>4.7.3</muleVersion>
+						<muleVersion>4.7.3:2e</muleVersion>
 						<username>${env.PLATFORM_USERNAME}</username>
 						<password>${env.PLATFORM_PASSWORD}</password>
 						<applicationName>cicd-ai-demo</applicationName>
