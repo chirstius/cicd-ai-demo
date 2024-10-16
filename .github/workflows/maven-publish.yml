@@ -34,6 +34,10 @@ jobs:
         if: ${{ failure() }}
         run: |
           echo "JOB_STATE=fail" >> $GITHUB_ENV
+      - name: Set Job Cancelled
+        if: ${{ cancelled() }}
+        run: |
+          echo "JOB_STATE=cancelled" >> $GITHUB_ENV
       - name: Send Job Run Result
         id: api-request
         if: ${{ always() }}
