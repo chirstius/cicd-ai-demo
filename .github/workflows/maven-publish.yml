@@ -38,6 +38,9 @@ jobs:
         if: ${{ cancelled() }}
         run: |
           echo "JOB_STATE=cancelled" >> $GITHUB_ENV
+      - name: Wait for job to complete
+        run: sleep 15s
+        shell: bash
       - name: Send Job Run Result
         id: api-request
         if: ${{ always() }}
