@@ -33,7 +33,6 @@
 				<configuration>
 					<classifier>mule-application</classifier>
 					<cloudHubDeployment>
-						<muleVersion>4.8.0:8e</muleVersion>
 						<username>${env.PLATFORM_USERNAME}</username>
 						<password>${env.PLATFORM_PASSWORD}</password>
 						<applicationName>cicd-ai-demo</applicationName>
