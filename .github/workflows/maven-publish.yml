@@ -4,6 +4,7 @@ on:
     branches: main
     paths-ignore: 
       - '**.yml'
+      - '.maven/**'
   workflow_dispatch:
     
 jobs:
@@ -17,6 +18,14 @@ jobs:
 #run the maven deploy lifecycle. The -B indicated a batch process,
 #which reduces the amount of logging the deployment does
         run: mvn -B deploy -DmuleDeploy -s .maven/settings.xml
+        env:
+          NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
+          NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+          PLATFORM_USERNAME: ${{ secrets.PLATFORM_USERNAME }}
+          PLATFORM_PASSWORD: ${{ secrets.PLATFORM_PASSWORD }}
+          SANDBOX_CLIENT_ID: ${{ secrets.SANDBOX_CLIENT_ID }}
+          SANDBOX_CLIENT_SECRET: ${{ secrets.SANDBOX_CLIENT_SECRET }}
+          BUS_GROUP_ID: ${{ secrets.BUS_GROUP_ID }}
       - name: Set Job Success
         if: ${{ success() }}
         run: |
@@ -25,6 +34,10 @@ jobs:
         if: ${{ failure() }}
         run: |
           echo "JOB_STATE=fail" >> $GITHUB_ENV
+      - name: Set Job Cancelled
+        if: ${{ cancelled() }}
+        run: |
+          echo "JOB_STATE=cancelled" >> $GITHUB_ENV
       - name: Send Job Run Result
         id: api-request
         if: ${{ always() }}
@@ -40,14 +53,4 @@ jobs:
       - name: Show API Response Data
         if: always()
         run: |
-          echo "Response Data: ${{ steps.api-request.outputs.response-data }}"
-#Pass in the secrets we need for deployment as environment variables
-        env:
-          NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
-          NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-          PLATFORM_USERNAME: ${{ secrets.PLATFORM_USERNAME }}
-          PLATFORM_PASSWORD: ${{ secrets.PLATFORM_PASSWORD }}
-          SANDBOX_CLIENT_ID: ${{ secrets.SANDBOX_CLIENT_ID }}
-          SANDBOX_CLIENT_SECRET: ${{ secrets.SANDBOX_CLIENT_SECRET }}
-          BUS_GROUP_ID: ${{ secrets.BUS_GROUP_ID }}
-  
+          echo "Response Data: ${{ steps.api-request.outputs.response-data }}"  

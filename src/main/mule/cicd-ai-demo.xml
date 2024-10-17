@@ -10,6 +10,6 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<flow name="cicd-ai-demoFlow" doc:id="02fb4e16-8dbb-4a8f-bedc-d3362bb51073" >
 		<http:listener doc:name="Listener" doc:id="a83a950d-5302-4a87-97a3-c3249f72a855" config-ref="HTTP_Listener_config" path="/hello"/>
 		<logger level="INFO" doc:name="Logger" doc:id="34272df4-ca1d-49c8-b952-d4fe81d140fb" message="#[attributes.requestPath]"/>
-		<set-payload value="Hello World!" doc:name="Set Payload" doc:id="1ca39fc4-3bb3-4463-b624-05e0e771c2d6" mimeType="text/plain"/>
+		<set-payload value="Hello World!" doc:name="Set Payload" doc:id="1ca39fc4-3bb3-4463-b624-05e0e771c2d6"/>
 	</flow>
 </mule>

@@ -13,9 +13,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<app.runtime>4.7.4</app.runtime>
+		<app.runtime>4.7.3</app.runtime>
 		<mule.maven.plugin.version>4.3.0</mule.maven.plugin.version>
-		<munit.version>3.3.0</munit.version>
+		<munit.version>3.2.0</munit.version>
 	</properties>
 
 	<build>
@@ -33,7 +33,7 @@
 				<configuration>
 					<classifier>mule-application</classifier>
 					<cloudHubDeployment>
-						<muleVersion>4.7.4</muleVersion>
+						<muleVersion>4.7.3</muleVersion>
 						<username>${env.PLATFORM_USERNAME}</username>
 						<password>${env.PLATFORM_PASSWORD}</password>
 						<applicationName>cicd-ai-demo</applicationName>
@@ -94,14 +94,14 @@
 		<dependency>
 			<groupId>com.mulesoft.munit</groupId>
 			<artifactId>munit-tools</artifactId>
-			<version>3.3.0</version>
+			<version>3.2.0</version>
 			<classifier>mule-plugin</classifier>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.mulesoft.munit</groupId>
 			<artifactId>munit-runner</artifactId>
-			<version>3.3.0</version>
+			<version>3.2.0</version>
 			<classifier>mule-plugin</classifier>
 			<scope>test</scope>
 		</dependency>
