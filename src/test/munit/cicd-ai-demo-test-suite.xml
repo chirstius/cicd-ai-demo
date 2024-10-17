@@ -30,7 +30,7 @@ payload]]></ee:set-payload>
 				</ee:message>
 			</ee:transform>
 			<logger level="INFO" doc:name="MIME Type" doc:id="fc579cc6-31e4-4e2b-907a-ad322189256a" message="TESTING RESPONSE MIME TYPE" />
-			<munit-tools:assert-that doc:name="Assert content type is text/plain" doc:id="dff45f17-1ca2-4335-a8a3-c78ebca166fc" expression="#[attributes.headers['content-type']]" is="#[MunitTools::equalTo('text/plain')]" message='#["EXPECTED:\nMIME Type: text/plain\nGOT:\nMIME Type: " ++ payload.^mediaType]'/>
+			<munit-tools:assert-that doc:name="Assert content type is text/plain" doc:id="dff45f17-1ca2-4335-a8a3-c78ebca166fc" expression="#[attributes.headers['content-type']]" is="#[MunitTools::equalTo('text/plain')]" message='#["\nEXPECTED:\nMIME Type: text/plain\nGOT:\nMIME Type: " ++ payload.^mediaType]'/>
 			<logger level="INFO" doc:name="Status" doc:id="d6fc7e72-b171-4543-9b1b-bcc472af1486" message="TESTING RESPONSE STATUS" />
 			<munit-tools:assert-that doc:name="Assert response status is 200" doc:id="fc107d2d-f7c5-4605-aaf8-aabfe0d8c22f" expression="#[attributes.statusCode]" is="#[MunitTools::equalTo(200)]" />
 			<logger level="INFO" doc:name="Value" doc:id="f36eca47-3e53-469b-a747-048bbf03b522" message="TESTING RESPONSE VALUE"/>
