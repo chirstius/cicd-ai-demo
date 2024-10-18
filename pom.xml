@@ -38,7 +38,7 @@
 						<applicationName>cicd-ai-demo</applicationName>
 						<environment>Sandbox</environment>
 						<workers>1</workers>
-						<workerType>MICRO</workerType>
+						<workerType>SMALL</workerType>
 						<objectStoreV2>true</objectStoreV2>
 						<region>us-east-2</region>
 						<businessGroupId>${env.BUS_GROUP_ID}</businessGroupId>
