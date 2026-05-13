@@ -44,6 +44,10 @@ local.properties
 target/
 .mule/**
 .mule/**/*
-.DS_Store
 velocity.log
 src/main/resources/config/*
+
+# OS Files #
+.DS_Store
+Thumbs.db
+desktop.ini
